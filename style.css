@@ -24,8 +24,8 @@ body{
   margin: auto;
   display:grid;
   grid-template-columns: repeat(5, 1fr);
-  overflow: hidden;
-  margin-bottom: 120px;
+  overflow-X: hidden;
+  margin-bottom: 77px;
 }
 .container .slider-div{
   transition: .3s;
@@ -113,6 +113,23 @@ body{
 .pagar .content .row .fa-angle-right{
   color: var(--blue-color);
 }
+.container >div{
+  height: 87vh;
+}
+.sub-div{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  color: var(--white-color);
+}
+.sub-div div{
+  padding: 25px 35px;
+  background-color: var(--main-alt-color);
+  border-radius: 10px;
+  font-size: 60px;
+  display: flex;
+  flex-direction: column;
+}
 /* navbar */
 nav{
   background-color: #131223;
@@ -163,7 +180,7 @@ nav ul li .code {
   font-size:16px;
 }
 nav ul li span{
-  font-size:22px;
+  font-size:20px;
 }
 nav ul li .fa-angle-left{
   transform: translate(-8px ,3px) rotate(45deg);
