@@ -20,16 +20,14 @@ body{
   align-items: center;
 }
 .container{
-  width: 90%;
+  width: 100%;
   margin: auto;
   display:grid;
   grid-template-columns: repeat(5, 1fr);
   overflow: hidden;
-  /* overflow-x: scroll; */
+  margin-bottom: 120px;
 }
 .container .slider-div{
-  /* width: 100%; */
-  background-color: #21864f54;
   transition: .3s;
   margin-left: -200%;
 }
@@ -55,7 +53,7 @@ body{
 .pagar .header .icon span{
   background-color: var(--blue-color);
   border-radius: 50%;
-  padding: 5px;
+  padding: 5px 7px;
   color: var(--white-color);
 }
 
@@ -81,7 +79,7 @@ body{
   margin: auto;
 }
 .pagar .clp .slider span{
-  width: 21%;
+  width: 28px;
   height: 4px;
   border-radius: 50px;
   background-color: #565458;
@@ -110,17 +108,21 @@ body{
   color: var(--white-color);
   background-color: #767879;
   border-radius: 50%;
-  padding: 5px 0px 5px 5px;
+  padding: 5px 2px 5px 6px;
 }
 .pagar .content .row .fa-angle-right{
   color: var(--blue-color);
 }
-
+/* navbar */
 nav{
   background-color: #131223;
   padding: 1px 18px;
   margin-top: 40px;
   color: var(--white-color);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  box-shadow: 0 0 20px 0 #131223;
 }
 nav ul{
   list-style: none;
@@ -131,9 +133,15 @@ nav ul li{
   text-align: center;
   justify-content: center;
   position: relative;
+  text-align: center;
+  justify-items: center;
+  cursor: pointer;
 }
 nav ul li.active{
   color: var(--blue-color);
+}
+nav ul li.center span{
+  color: var(--white-color);
 }
 nav ul li.active span{
   color: var(--white-color);
@@ -151,16 +159,20 @@ nav ul li .code {
   display: grid;
   align-items: center;
   justify-content: center;
+  transform: translateY(-13px) scale(1.2);
+  font-size:16px;
 }
-nav ul li .code div{
-  color: var(--white-color);
-  border: 1px solid var(--white-color);
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* transform:rotate(45deg); */
+nav ul li span{
+  font-size:22px;
+}
+nav ul li .fa-angle-left{
+  transform: translate(-8px ,3px) rotate(45deg);
+}
+nav ul li .fa-angle-right{
+  transform: translate(20px,-3px) rotate(45deg);
+}
+nav ul li .fa-qrcode{
+  font-size: 21px;
 }
 nav ul li .code div .fa-star{
   background-color: var(--blue-color);

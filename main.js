@@ -1,11 +1,28 @@
 let slider = document.getElementById("container");
 let item = document.querySelectorAll(".container .slider-div");
+let lis = document.querySelectorAll("nav .item");
 let isDown = false;
 let startX;
 let scrollLeft;
 let defulMarginLeft = 200;
 let marginLeft;
 let walk;
+let sh;
+
+lis.forEach((li, index)=> {
+  li.addEventListener("click", () => {
+    for (i = 0; i < lis.length; i++) {
+      lis[i].classList.remove("active");
+    }
+    li.classList.add("active");
+    for (i = 0; i < item.length; i++) {
+      marginLeft = `-${index}00%`
+      item[i].style.marginLeft = marginLeft
+    }
+    marginLeft = `${index}${0}${0}`
+    defulMarginLeft = Number(marginLeft)
+  })
+});
 
 window.onresize = () => {
   let itemWidht = slider.clientWidth;
@@ -16,26 +33,22 @@ window.onresize = () => {
 };
 window.onload = () => {
   let itemWidht = slider.clientWidth;
-  slider.scrollLeft = 10 % console.log(itemWidht);
+  // slider.scrollLeft = 10 % console.log(itemWidht);
   for (i = 0; i < item.length; i++) {
     item[i].style.width = `${itemWidht}px`;
     item[i].style.marginLeft = `-${defulMarginLeft}%`;
   }
 };
+
+// mouse event
+
 slider.addEventListener("mousedown", (e) => {
+  startX = e.pageX - slider.offsetLeft;
   isDown = true;
   if (isDown) {
     slider.style.cursor = "pointer";
   }
-  startX = e.pageX - slider.offsetLeft;
   scrollLeft = slider.scrollLeft;
-});
-
-slider.addEventListener("mouseleave", () => {
-  isDown = false;
-  if (!isDown) {
-    slider.style.cursor = "auto";
-  }
 });
 slider.addEventListener("mousemove", (e) => {
   if (!isDown) return;
@@ -48,84 +61,30 @@ slider.addEventListener("mousemove", (e) => {
   }
 });
 slider.addEventListener("mouseup", () => {
-  isDown = false;
-  if (!isDown) {
-    slider.style.cursor = "auto";
-  }
-  if (walk < 0) {
-    if (marginLeft > 400) {
-      for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `-400%`;
-      }
-      defulMarginLeft = 400;
-    }
-    if (marginLeft < 400) {
-      for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `-400%`;
-      }
-      defulMarginLeft = 400;
-    }
-    if (marginLeft < 300) {
-      for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `-300%`;
-      }
-      defulMarginLeft = 300;
-    }
-    if (marginLeft < 200) {
-      for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `-200%`;
-      }
-      defulMarginLeft = 200;
-    }
-    if (marginLeft < 100) {
-      for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `0%`;
-      }
-      defulMarginLeft = 100;
-    }
-  }
-  // ====================
-  if (walk > 0) {
-    if (marginLeft < 400) {
-      for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `-300%`;
-      }
-      defulMarginLeft = 300;
-    }
-    if (marginLeft < 300) {
-      for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `-200%`;
-      }
-      defulMarginLeft = 200;
-    }
-    if (marginLeft < 200) {
-      for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `-100%`;
-      }
-      defulMarginLeft = 100;
-    }
-    if (marginLeft < 100) {
-      for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `0%`;
-      }
-      defulMarginLeft = 0;
-    }
-  }
-  console.log(marginLeft)
+  onEndEvent()
 });
 
-slider.addEventListener("ontouchstart", () => {
+// tuch event
+
+slider.addEventListener("touchstart", (e) => {
+  startX = [...e.changedTouches][0].pageX - slider.offsetLeft;
+  isDown = true;  
+  scrollLeft = slider.scrollLeft;
+});
+slider.addEventListener("touchend", (e) => {
+  onEndEvent()
+});
+slider.addEventListener("touchmove", (e) => {
   if (!isDown) return;
   e.preventDefault();
-  const x = e.pageX - slider.offsetLeft;
+  const x = [...e.changedTouches][0].pageX ;
   walk = x - startX;
   marginLeft = (scrollLeft - walk) / 10 + defulMarginLeft;
   for (i = 0; i < item.length; i++) {
     item[i].style.marginLeft = `-${marginLeft}%`;
   }
-  console.log("good")
 });
-slider.addEventListener("ontouchend", () => {
+function onEndEvent() {
   isDown = false;
   if (!isDown) {
     slider.style.cursor = "auto";
@@ -157,7 +116,7 @@ slider.addEventListener("ontouchend", () => {
     }
     if (marginLeft < 100) {
       for (i = 0; i < item.length; i++) {
-        item[i].style.marginLeft = `0%`;
+        item[i].style.marginLeft = `-100%`;
       }
       defulMarginLeft = 100;
     }
@@ -189,9 +148,34 @@ slider.addEventListener("ontouchend", () => {
       defulMarginLeft = 0;
     }
   }
-  console.log("good");
-});
-
-// ontouchmove
-// ontouchend
-ontouchstart
+  if (defulMarginLeft === 400) {
+    for (i = 0; i < lis.length; i++) {
+      lis[i].classList.remove("active");
+    }
+    lis[4].classList.add("active");
+  }
+  if (defulMarginLeft === 300) {
+    for (i = 0; i < lis.length; i++) {
+      lis[i].classList.remove("active");
+    }
+    lis[3].classList.add("active");
+  }
+  if (defulMarginLeft === 200) {
+    for (i = 0; i < lis.length; i++) {
+      lis[i].classList.remove("active");
+    }
+    lis[2].classList.add("active");
+  }
+  if (defulMarginLeft === 100) {
+    for (i = 0; i < lis.length; i++) {
+      lis[i].classList.remove("active");
+    }
+    lis[1].classList.add("active");
+  }
+  if (defulMarginLeft === 0) {
+    for (i = 0; i < lis.length; i++) {
+      lis[i].classList.remove("active");
+    }
+    lis[0].classList.add("active");
+  }
+}
