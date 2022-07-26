@@ -26,7 +26,6 @@ lis.forEach((li, index)=> {
 
 window.onresize = () => {
   let itemWidht = slider.clientWidth;
-  console.log(itemWidht);
   for (i = 0; i < item.length; i++) {
     item[i].style.width = `${itemWidht}px`;
   }
